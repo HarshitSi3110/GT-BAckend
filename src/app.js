@@ -27,5 +27,5 @@ app.use("/api/contact", require("./routes/contact.routes"));
 
 // Package APIs
 app.use("/api/package", require("./routes/package.routes"));
-
+app.use("/api/blog", require("./routes/blog.routes"));
 module.exports = app;
