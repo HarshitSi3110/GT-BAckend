@@ -1,46 +1,31 @@
-const express = require("express");
 
+const express = require("express");
 const cors = require("cors");
 
 const app = express();
 
+// CORS - allow frontend requests
 app.use(cors());
 
-/*
-INCREASE BODY LIMIT
-*/
-
-app.use(
-  express.json({
-    limit: "50mb",
-  }),
-);
+// Request body limits
+app.use(express.json({ limit: "50mb" }));
 
 app.use(
   express.urlencoded({
     extended: true,
     limit: "50mb",
-  }),
+  })
 );
 
+// Health check
 app.get("/", (req, res) => {
-  res.send("Backend Running");
+  res.status(200).send("Tripmates Backend Running");
 });
 
-app.use(
-  "/api/contact",
+// Contact APIs
+app.use("/api/contact", require("./routes/contact.routes"));
 
-  require("./routes/contact.routes"),
-);
-
-/*
-PACKAGE API
-*/
-
-app.use(
-  "/api/package",
-
-  require("./routes/package.routes"),
-);
+// Package APIs
+app.use("/api/package", require("./routes/package.routes"));
 
 module.exports = app;

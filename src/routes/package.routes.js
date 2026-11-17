@@ -1,59 +1,27 @@
-const express =
-require(
-"express"
-);
+const express = require("express");
 
-const router =
-express.Router();
+const router = express.Router();
 
 const {
+  createPackage,
 
-createPackage,
+  getPackages,
 
-getPackages,
+  getPackage,
 
-getPackage,
+  updatePackage,
 
-updatePackage,
+  deletePackage,
+} = require("../controllers/package.controller");
 
-deletePackage
+router.post("/", createPackage);
 
-}
+router.get("/", getPackages);
 
-=
+router.get("/:id", getPackage);
 
-require(
-"../controllers/package.controller"
-);
+router.put("/:id", updatePackage);
 
+router.delete("/:id", deletePackage);
 
-
-router.post(
-"/",
-createPackage
-);
-
-router.get(
-"/",
-getPackages
-);
-
-router.get(
-"/:id",
-getPackage
-);
-
-router.put(
-"/:id",
-updatePackage
-);
-
-router.delete(
-"/:id",
-deletePackage
-);
-
-
-
-module.exports =
-router;
+module.exports = router;
